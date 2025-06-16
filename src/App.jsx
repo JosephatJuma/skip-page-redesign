@@ -1,13 +1,11 @@
 import "./App.css";
-import SkipSelector from "./components/SkipSelector";
-
+import Skips from "./pages/Skips";
+import { SkipProvider } from "./context/SkipContext";
 function App() {
   return (
-    <>
-      <div>
-        <SkipSelector />
-      </div>
-    </>
+    <SkipProvider>
+      <Skips />
+    </SkipProvider>
   );
 }
 
