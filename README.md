@@ -1,12 +1,68 @@
-# React + Vite
+# Skip Page Redesign
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔗 Live Link
 
-Currently, two official plugins are available:
+[Add your deployment link here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+This project is a redesign of the Skip Page, built with modern React tooling and UI best practices to improve responsiveness, styling, and user experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+React (with Vite for fast builds and dev server)
+
+Tailwind CSS for styling
+
+ShadCN UI for intuitive components
+
+Context API + Custom Hooks for state management
+
+## The Approach
+
+### Project Setup
+
+Initialized a new React project using Vite.
+
+### Styling
+
+Integrated Tailwind CSS for responsive and utility-first styling.
+
+### Component Structure
+
+Created the core UI components:
+
+- SkipCard: Renders individual skip items.
+- SkipSelector: Displays a list of skips.
+
+### Responsive Design
+
+Styled all components using Tailwind CSS to ensure responsiveness across devices.
+
+### State Management
+
+Created a SkipContext to manage application state in one centralized location.
+State includes: skips, selectedSkip, loading, and error.
+
+Custom Hook
+
+    Built a useSkip hook to simplify access to the SkipContext and encourage clean component logic.
+
+### UI Enhancements
+
+Integrated ShadCN UI to enhance the look and feel of the user interface.
+
+### Data Fetching
+
+In the Skips page, made an API call to fetch skip data.
+The result updates the skips state in the context.
+
+### Error Handling
+
+If there's an error, the SkipsError component is displayed.
+If skips are available, the SkipSelector is rendered.
+
+### Selected Skip Details
+
+The SelectedSkip component is rendered as a dialog when a skip is selected.
+It displays detailed information about the chosen skip to allow the user to proceed.
