@@ -40,7 +40,7 @@ const SKIP_IMAGES: Record<number, string> = {
   10: Yard10,
   12: Yard12,
   14: Yard14,
-  20: Yard14, // fallback for size <= 20
+  20: Yard14,
   40: Yard40,
 };
 
@@ -90,63 +90,63 @@ const SkipCard = ({
 
   return (
     <Card
-      className={`flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+      className={`overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 p-0 ${
         isSelected ? "ring-4 ring-primary border-primary" : "border-gray-300"
       }`}
     >
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <div>
-            <CardTitle className="text-2xl font-bold">
-              {skip.size} Yard Skip
-            </CardTitle>
-            <CardDescription className="mt-1 text-muted-foreground">
-              Perfect for {getSkipUseCase(skip.size)}
-            </CardDescription>
+      {/* Top Image, no space above */}
+      <div
+        className="h-50 w-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
+      />
+
+      <div className="p-4 flex flex-col h-full justify-between">
+        <div>
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <CardTitle className="text-xl font-bold text-gray-900">
+                {skip.size} Yard Skip
+              </CardTitle>
+              <CardDescription className="text-sm text-muted-foreground">
+                Perfect for {getSkipUseCase(skip.size)}
+              </CardDescription>
+            </div>
+            <Badge className="text-xs bg-gray-800 text-white">
+              {skip.hire_period_days} day hire
+            </Badge>
           </div>
-          <Badge variant="default" className="px-3 py-1 rounded-full text-sm">
-            {skip.hire_period_days} day hire
-          </Badge>
-        </div>
-      </CardHeader>
 
-      <CardContent>
-        <div className="flex justify-center mb-4">
-          <img
-            src={image}
-            alt={`${skip.size} yard skip`}
-            className="max-w-full h-auto"
-          />
-        </div>
+          <div className="text-2xl font-bold text-center my-3 text-gray-900">
+            £{totalPrice}
+          </div>
 
-        <div className="text-3xl font-bold mb-4 text-center">£{totalPrice}</div>
-
-        <div className="space-y-2">
-          {features
-            .filter((f) => f.condition)
-            .map(({ icon: Icon, label }, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="bg-purple-100 p-2 rounded-lg">
-                  <Icon className="h-4 w-4 text-purple-600" />
+          <div className="space-y-2 text-sm">
+            {features
+              .filter((f) => f.condition)
+              .map(({ icon: Icon, label }, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="bg-purple-100 p-1.5 rounded-md">
+                    <Icon className="h-4 w-4 text-purple-600" />
+                  </div>
+                  <span className="text-gray-800 font-medium">{label}</span>
                 </div>
-                <span>{label}</span>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
-      </CardContent>
 
-      <CardFooter className="mt-auto">
-        <Button
-          size="lg"
-          className={`w-full font-bold ${
-            isSelected ? "bg-gradient-to-r from-green-600 to-emerald-700" : ""
-          }`}
-          onClick={() => handleSelect?.(skip)}
-        >
-          {isSelected && <CheckCircle className="mr-2 h-5 w-5" />}
-          {isSelected ? "Selected" : "Select this skip"}
-        </Button>
-      </CardFooter>
+        <CardFooter className="mt-4 p-0">
+          <Button
+            size="sm"
+            className={`w-full font-bold ${
+              isSelected ? "bg-gradient-to-r from-green-600 to-emerald-700" : ""
+            }`}
+            onClick={() => handleSelect?.(skip)}
+          >
+            {isSelected && <CheckCircle className="mr-2 h-4 w-4" />}
+            {isSelected ? "Selected" : "Select"}
+          </Button>
+        </CardFooter>
+      </div>
     </Card>
   );
 };
