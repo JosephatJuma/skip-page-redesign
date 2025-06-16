@@ -1,13 +1,6 @@
-import React, { useState } from "react";
 import SkipCard from "./SkipCard";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Phone, MessageSquare, HelpCircle, MapPin } from "lucide-react";
 
 const SkipSelector = ({ skips, selectedSkip, handleSelect }) => {

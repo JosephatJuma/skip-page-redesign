@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Card,
   CardHeader,
@@ -6,22 +5,61 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, Package, Truck, ShieldCheck } from "lucide-react";
+
 import {
-  Home,
-  ShieldCheck,
-  CheckCircle,
-  Package,
-  Ruler,
-  ShoppingBasket,
-} from "lucide-react";
+  Yard4,
+  Yard6,
+  Yard8,
+  Yard10,
+  Yard12,
+  Yard14,
+  Yard40,
+} from "@/assets/skip-yards";
 
 type SkipCardProps = {
-  skip: any;
+  skip: {
+    size: number;
+    price_before_vat: number;
+    vat: number;
+    hire_period_days: number;
+    allowed_on_road?: boolean;
+    allows_heavy_waste?: boolean;
+  };
   isSelected?: boolean;
   handleSelect?: (skip: any) => void;
+};
+
+const SKIP_IMAGES: Record<number, string> = {
+  4: Yard4,
+  6: Yard6,
+  8: Yard8,
+  10: Yard10,
+  12: Yard12,
+  14: Yard14,
+  20: Yard14, // fallback for size <= 20
+  40: Yard40,
+};
+
+const getSkipImage = (size: number): string => {
+  if (size <= 4) return SKIP_IMAGES[4];
+  if (size <= 6) return SKIP_IMAGES[6];
+  if (size <= 8) return SKIP_IMAGES[8];
+  if (size <= 10) return SKIP_IMAGES[10];
+  if (size <= 12) return SKIP_IMAGES[12];
+  if (size <= 20) return SKIP_IMAGES[14];
+  return SKIP_IMAGES[40];
+};
+
+const getSkipUseCase = (size: number) => {
+  if (size <= 4) return "small home projects";
+  if (size <= 6) return "medium renovations";
+  if (size <= 10) return "large home projects";
+  if (size <= 14) return "construction sites";
+  return "commercial projects";
 };
 
 const SkipCard = ({
@@ -30,102 +68,74 @@ const SkipCard = ({
   handleSelect,
 }: SkipCardProps) => {
   const totalPrice = Math.round(skip.price_before_vat * (1 + skip.vat / 100));
+  const image = getSkipImage(skip.size);
 
-  // Calculate dimensions based on skip size
-  const dimensions = {
-    width:
-      skip.size <= 6 ? `${skip.size * 0.9 + 2.5}m` : `${skip.size * 0.75 + 3}m`,
-    height: skip.size <= 6 ? "1.8m" : "2.2m",
-    depth: skip.size <= 6 ? "1.5m" : "2.0m",
-  };
+  const features = [
+    {
+      condition: true,
+      icon: Truck,
+      label: "Includes delivery & collection",
+    },
+    {
+      condition: skip.allowed_on_road,
+      icon: ShieldCheck,
+      label: "Road Permit included",
+    },
+    {
+      condition: skip.allows_heavy_waste,
+      icon: Package,
+      label: "Allows Heavy Waste",
+    },
+  ];
 
   return (
     <Card
-      className={`transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-        isSelected ? "ring-4 ring-primary border-primary" : "border-gray-500"
+      className={`flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+        isSelected ? "ring-4 ring-primary border-primary" : "border-gray-300"
       }`}
     >
-      <CardHeader className="pb-3">
+      <CardHeader>
         <div className="flex justify-between items-start">
           <div>
             <CardTitle className="text-2xl font-bold">
               {skip.size} Yard Skip
             </CardTitle>
-            <CardDescription className="mt-1">
+            <CardDescription className="mt-1 text-muted-foreground">
               Perfect for {getSkipUseCase(skip.size)}
             </CardDescription>
           </div>
-          <Badge variant="secondary" className="px-3 py-1">
+          <Badge variant="default" className="px-3 py-1 rounded-full text-sm">
             {skip.hire_period_days} day hire
           </Badge>
         </div>
       </CardHeader>
 
       <CardContent>
-        <div className="mb-5 p-4 bg-muted/50 rounded-lg">
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="bg-blue-100 p-2 rounded-lg">
-                <Home className="h-4 w-4 text-blue-600" />
-              </div>
-              <span>Home Use</span>
-            </div>
+        <div className="flex justify-center mb-4">
+          <img
+            src={image}
+            alt={`${skip.size} yard skip`}
+            className="max-w-full h-auto"
+          />
+        </div>
 
-            <div className="flex items-center gap-2">
-              <div className="bg-green-100 p-2 rounded-lg">
-                <ShieldCheck className="h-4 w-4 text-green-600" />
-              </div>
-              <span>Includes VAT</span>
-            </div>
+        <div className="text-3xl font-bold mb-4 text-center">£{totalPrice}</div>
 
-            {skip.allowed_on_road && (
-              <div className="flex items-center gap-2">
-                <div className="bg-amber-100 p-2 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-amber-600" />
-                </div>
-                <span>Road Permit</span>
-              </div>
-            )}
-
-            {skip.allows_heavy_waste && (
-              <div className="flex items-center gap-2">
+        <div className="space-y-2">
+          {features
+            .filter((f) => f.condition)
+            .map(({ icon: Icon, label }, i) => (
+              <div key={i} className="flex items-center gap-3">
                 <div className="bg-purple-100 p-2 rounded-lg">
-                  <Package className="h-4 w-4 text-purple-600" />
+                  <Icon className="h-4 w-4 text-purple-600" />
                 </div>
-                <span>Heavy Waste</span>
+                <span>{label}</span>
               </div>
-            )}
-          </div>
-        </div>
-
-        <div className="mb-5">
-          <div className="text-3xl font-bold mb-1">£{totalPrice}</div>
-          <p className="text-muted-foreground text-sm">
-            Includes delivery & collection
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 mb-5">
-          <div className="bg-muted/50 p-3 rounded-lg">
-            <div className="flex items-center gap-2 text-muted-foreground mb-1">
-              <Ruler className="h-4 w-4" />
-              <span>Dimensions</span>
-            </div>
-            <div className="font-medium">
-              {dimensions.width} × {dimensions.height} × {dimensions.depth}
-            </div>
-          </div>
-          <div className="bg-muted/50 p-3 rounded-lg">
-            <div className="flex items-center gap-2 text-muted-foreground mb-1">
-              <ShoppingBasket className="h-4 w-4" />
-              <span>Capacity</span>
-            </div>
-            <div className="font-medium">~{skip.size * 15} bin bags</div>
-          </div>
+            ))}
         </div>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <Button
           size="lg"
           className={`w-full font-bold ${
@@ -133,21 +143,12 @@ const SkipCard = ({
           }`}
           onClick={() => handleSelect?.(skip)}
         >
-          {isSelected ? <CheckCircle className="mr-2 h-5 w-5" /> : null}
+          {isSelected && <CheckCircle className="mr-2 h-5 w-5" />}
           {isSelected ? "Selected" : "Select this skip"}
         </Button>
       </CardFooter>
     </Card>
   );
-};
-
-// Helper function to generate use cases based on skip size
-const getSkipUseCase = (size: number) => {
-  if (size <= 4) return "small home projects";
-  if (size <= 6) return "medium renovations";
-  if (size <= 10) return "large home projects";
-  if (size <= 14) return "construction sites";
-  return "commercial projects";
 };
 
 export default SkipCard;

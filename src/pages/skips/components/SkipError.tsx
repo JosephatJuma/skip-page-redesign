@@ -1,11 +1,10 @@
-import React from "react";
 type ErrorProps = {
   error: Error;
   handleRetry: () => void;
 };
 function SkipError({ error, handleRetry }: ErrorProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4 ">
       {/* Background elements */}
       <div className="absolute top-10 left-10 w-24 h-24 bg-blue-200 rounded-full opacity-20 blur-2xl"></div>
       <div className="absolute bottom-20 right-20 w-32 h-32 bg-green-200 rounded-full opacity-20 blur-2xl"></div>

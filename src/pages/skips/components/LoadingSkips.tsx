@@ -1,32 +1,8 @@
-import React from "react";
-import { Skeleton } from "../../../components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function LoadingSkips() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-muted/40 p-4">
-      <div className="relative w-48 h-56 mb-8 md:w-56 md:h-64">
-        <div className="absolute bottom-0 w-full h-3/4 bg-gradient-to-r from-primary to-indigo-600 rounded-lg shadow-xl overflow-hidden">
-          <div className="absolute bottom-0 left-0 right-0 h-0 bg-gradient-to-r from-green-400 to-emerald-500 animate-fill">
-            <div className="absolute top-0 left-0 right-0 h-2 bg-white opacity-20 animate-shine"></div>
-          </div>
-
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-1/4 left-2 w-4 h-4 border-2 border-white rounded-full"></div>
-            <div className="absolute top-1/3 right-4 w-3 h-3 border-2 border-white rounded-full"></div>
-            <div className="absolute bottom-1/3 left-6 w-5 h-5 border-2 border-white rounded-full"></div>
-          </div>
-        </div>
-
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/4">
-          <div className="absolute top-0 left-0 right-0 h-full bg-gradient-to-r from-primary/80 to-indigo-700 rounded-t-lg"></div>
-          <div className="absolute top-full left-0 right-0 h-0 border-t-[20px] border-l-[20px] border-r-[20px] border-t-primary border-l-transparent border-r-transparent"></div>
-        </div>
-
-        <div className="absolute top-4 left-4 w-3 h-3 bg-amber-500 rounded-full animate-waste1"></div>
-        <div className="absolute top-8 right-6 w-4 h-4 bg-green-500 rounded-full animate-waste2"></div>
-        <div className="absolute top-12 left-10 w-2 h-2 bg-red-500 rounded-full animate-waste3"></div>
-      </div>
-
       <div className="text-center max-w-md">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-pulse">
           Finding Best Skips
@@ -41,8 +17,8 @@ function LoadingSkips() {
       </div>
 
       {/* Skeleton cards for loading state */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl">
-        {[...Array(3)].map((_, i) => (
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-6xl">
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
             className="bg-background border rounded-xl p-6 shadow-sm"

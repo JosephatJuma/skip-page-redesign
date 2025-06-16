@@ -1,13 +1,19 @@
-import React from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "../../../components/ui/dialog";
-import { Button } from "../../../components/ui/button";
-import { X, Ruler, CalendarDays, Package, CheckCircle } from "lucide-react";
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  X,
+  Ruler,
+  CalendarDays,
+  Package,
+  ArrowRight,
+  Truck,
+} from "lucide-react";
 
 function SelectedSkip({ selectedSkip, handleCancel }: any) {
   if (!selectedSkip) return null;
@@ -33,7 +39,7 @@ function SelectedSkip({ selectedSkip, handleCancel }: any) {
       value: `${selectedSkip.hire_period_days} days`,
     },
     {
-      icon: <CheckCircle className="h-5 w-5 text-emerald-500" />,
+      icon: <Truck className="h-5 w-5 text-emerald-500" />,
       title: "Includes",
       value: "Delivery & collection",
     },
@@ -90,7 +96,7 @@ function SelectedSkip({ selectedSkip, handleCancel }: any) {
 
           <div className="space-y-3">
             <Button className="w-full h-12 bg-green-600 hover:bg-green-700">
-              Proceed with hire
+              Proceed with hire <ArrowRight />
             </Button>
           </div>
 
