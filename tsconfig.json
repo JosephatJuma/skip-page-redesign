@@ -9,6 +9,10 @@
     }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx", // ✅ For React 17+ with automatic JSX runtime
+    "module": "ESNext",
+    "target": "ES6",
+    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
