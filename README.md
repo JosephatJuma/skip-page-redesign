@@ -2,7 +2,7 @@
 
 ## 🔗 Live Link
 
-[Add your deployment link here]
+https://skip-page-redesign-eight.vercel.app/
 
 ## Overview
 
