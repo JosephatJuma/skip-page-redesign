@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
+import React, { Fragment, useEffect } from "react";
 import SkipSelector from "./components/SkipSelector";
 import LoadingSkips from "./components/LoadingSkips";
 import SkipError from "./components/SkipError";
+import SelectedSkip from "./components/SelectedSkip";
 import { useSkip } from "../../context/SkipContext";
 
 function Skips() {
@@ -64,6 +65,11 @@ function Skips() {
                 />
               </div>
             )}
+
+            <SelectedSkip
+              selectedSkip={selectedSkip}
+              handleCancel={() => setSelectedSkip(null)}
+            />
           </Fragment>
         )}
       </div>

@@ -1,5 +1,5 @@
 import "./App.css";
-import Skips from "./pages/skips/Skips";
+import Skips from "./pages/skips";
 import { SkipProvider } from "./context/SkipContext";
 function App() {
   return (
